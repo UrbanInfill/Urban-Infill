@@ -188,6 +188,8 @@ function postData(url = ``, data = {},isVacant) {
                         const patt5 = /lts.([0-9]*).([0-9]*).(&[0-9]*)/gi;
                         const patt6 = /lts.([0-9]*).([0-9]*).&.([0-9]*)/gi;
                         const patt7 = /l([0-9]*).-.([0-9]*)/gi;
+                        const patt8 = /lot ([0-9]*).-.([0-9]*)/gi;
+                        const patt9 = /lot([0-9]*).-.([0-9]*)/gi;
                         if (property['summary']['legal1']) {
                             var result = property['summary']['legal1'].match(pattern);
                             var result2 = property['summary']['legal1'].match(patt1);
@@ -197,7 +199,9 @@ function postData(url = ``, data = {},isVacant) {
                             var result6 = property['summary']['legal1'].match(patt5);
                             var result7 = property['summary']['legal1'].match(patt6);
                             var result8 = property['summary']['legal1'].match(patt7);
-                            if (result || result2 || result3 || result4 || result5 || result6 || result7 || result8) {
+                            var result9 = property['summary']['legal1'].match(patt8);
+                            var result10 = property['summary']['legal1'].match(patt9);
+                            if (result || result2 || result3 || result4 || result5 || result6 || result7 || result8|| result9 || result10) {
                                 var text = '<div class="swiper-slide">'  +
                                     '<div class="box selectPOI">' +
                                     '<a class="h3" target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
