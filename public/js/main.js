@@ -81,7 +81,35 @@ $('#searchByAddress').click(function (e) {
 function getlist(lat,lng,isVacant)
 {
     var totalPages = 10;
-    $.ajax({
+
+    fetch(buildUrl('/getTotalPages',{lat:lat,lng:lng,zip:postalcode}), {
+    method: "get", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, cors, *same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+        "Content-Type": "application/json",
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        // "Content-Type": "application/x-www-form-urlencoded",
+    },
+    redirect: "follow", // manual, *follow, error
+    referrer: "no-referrer", // no-referrer, *client
+})
+    .then(function(response) {
+        if (response.status >= 200 && response.status < 300) {
+            return response.text()
+        }
+        throw new Error(response.statusText)
+    })
+    .then(function(data) {
+        totalPages = data;
+        console.log(data);
+        for (let i = 1; i <= totalPages; i++) {
+            console.log(postData('/allpropertiesList', {lat: lat, lng: lng, page: i, zip: postalcode},isVacant));
+        }
+    });
+
+  /*  $.ajax({
         type:'get',
         url:'/getTotalPages',
         data:{lat:lat,lng:lng,zip:postalcode},
@@ -99,7 +127,7 @@ function getlist(lat,lng,isVacant)
 
         },
         timeout: 5000
-    });
+    });*/
 }
 function buildUrl(url, parameters,isVacant) {
     let qs = "";
