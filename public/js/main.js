@@ -80,11 +80,12 @@ $('#searchByAddress').click(function (e) {
 
 function getlist(lat,lng,isVacant)
 {
-    var totalPages;
+    var totalPages = 10;
     $.ajax({
         type:'get',
         url:'/getTotalPages',
         data:{lat:lat,lng:lng,zip:postalcode},
+        cache:false,
         success:function(data){
             totalPages = data;
             console.log(data);
@@ -151,7 +152,10 @@ function postData(url = ``, data = {},isVacant) {
                             if(property['summary']['propclass'] .toLowerCase().includes("vacant")) {
                                 var text = '<div class="swiper-slide">'  +
                                     '<div class="box selectPOI">' +
-                                    '<a class="h3" target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
+                                    '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
+                                    '<div class="float-right">'+
+                                    '<input type="checkbox" name="selectedItem" aria-label="Checkbox for following text input">'+
+                                    '</div>'+
                                     '<div class="restaurant-content">' +
                                     '<label>Legal Description</label>' +
                                     '<small>' + property['summary']['legal1'] + '</small></div></div></div>';
@@ -185,7 +189,10 @@ function postData(url = ``, data = {},isVacant) {
                             if (result || result2 || result3 || result4 || result5 || result6 || result7 || result8|| result9 || result10) {
                                 var text = '<div class="swiper-slide">'  +
                                     '<div class="box selectPOI">' +
-                                    '<a class="h3" target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
+                                    '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
+                                    '<div class="float-right">'+
+                                    '<input type="checkbox" name="selectedItem" aria-label="Checkbox for following text input">'+
+                                    '</div>'+
                                     '<div class="restaurant-content">' +
                                     '<label>Legal Description</label>' +
                                     '<small>' + property['summary']['legal1'] + '</small></div></div></div>';
@@ -569,12 +576,15 @@ function codeAddress(address,isVacant = false) {
                     polys = [data];
                     init();
                 },
+                cache:false,
                 complete:function(){
                     getlist(lat,lng,isVacant)
+
                     $.ajax({
                         type:'get',
                         url:'/getHouseInventry',
                         data:{lat : lat,lng:lng},
+                        cache:false,
                         success:function(data){
                             console.log(data);
                             dountChart(data);
@@ -907,13 +917,80 @@ function init() {
 
 
 
-/// Model Opening Showing owner detail
+//send Email
 
-$('.swiper-slide').click(function () {
-    Alert("HELLO");
+$("#sendEmail").click((e)=>{
+    e.preventDefault();
+    let i =0;
+    let listArray = [];
+    if($("#emailaddress").val() == "")
+    {
+        $("#emailHelp").text("Please Enter Email address")
+        return "";
+    }
+    else {
+        if (!$("#emailaddress")[0].checkValidity()) {
+            $("#emailHelp").text("Please Enter Correct Email address")
+            return "";
+
+        } else {
+            $("#emailHelp").text("")
+        }
+    }
+    return "";
+    $('input[name="selectedItem"]:checked').each(function() {
+        listArray.push([$(this).closest('.box').find('a').attr('line1'),$(this).closest('.box').find('a').attr('line2')]);
+    });
+
+
+    fetch("/sendMail", {
+        method: "post", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        body: JSON.stringify({addressList:JSON.stringify(listArray)}),
+        headers: {
+            "Content-Type": "application/json",
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    })
+        .then(function(response) {
+            if (response.status >= 200 && response.status < 300) {
+                return response.json()
+            }
+            throw new Error(response.statusText)
+        })
+        .then(function(data) {
+            console.log(data);
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+    /*$.ajax({
+        type:'post',
+        url:'/sendMail',
+        data:{addressList:JSON.stringify(listArray)},
+        success:function(data){
+            console.log(data);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log("Please Wait to load all the data");
+        },
+        timeout: 5000
+    });*/
 })
-
-
 
 
 

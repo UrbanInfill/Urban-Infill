@@ -75,11 +75,20 @@
 
 
             <div class="col-md-3 col-xs-12 col-xs-12 mt-30" id="poiContent">
+                <div class="input-group mb-3">
+                    <input type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
+                    <div class="input-group-append">
+                        <button type="button" id="sendEmail" class="btn btn-secondary mb-1"><i class="far fa-envelope"></i></button>
+                    </div>
+                </div>
+                <small id="emailHelp" class="form-text text-muted"></small>
+
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
 
 
                     </div>
+
                     <!-- Add Arrows -->
                     <!-- Add Pagination -->
                 </div>
@@ -108,7 +117,22 @@
 
     <script type='text/javascript' src="js/donut-chart.js"></script>
     <script>
-
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 5,
+            direction: 'vertical',
+            slideToClickedSlide: false,
+            on:{
+                click: function(swiper, e){
+                    // var clicked = $(e.target);
+                    //openInfoModal(this.clickedIndex+1);
+                    //console.log(clicked);
+                },
+            },
+            navigation: {
+                nextEl: '.prev-slide',
+                prevEl: '.next-slide',
+            }
+        });
 
     </script>
 

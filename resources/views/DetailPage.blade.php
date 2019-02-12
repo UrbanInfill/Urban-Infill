@@ -161,7 +161,7 @@
                                         @foreach($assessmentValue as $historyValue)
                                             <tr>
                                                 <td>
-                                                    ${{$historyValue["tax"]["taxyear"]}}
+                                                    {{$historyValue["tax"]["taxyear"]}}
                                                 </td>
                                                 <td>
                                                     ${{$historyValue["market"]["mktimprvalue"]}}

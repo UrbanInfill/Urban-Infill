@@ -30,3 +30,4 @@ Route::get("allVacantpropertiesList",'AjaxController@allVacantpropertiesList');
 
 
 Route::get('/school','AjaxController@school');
+Route::post('/sendMail','AjaxController@SendEmail');

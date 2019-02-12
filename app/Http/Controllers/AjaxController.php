@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use vendor\project\StatusTest;
+use Illuminate\Support\Facades\Mail;
 
 class AjaxController extends Controller
 {
@@ -96,7 +98,7 @@ class AjaxController extends Controller
         $lng = $request->input('lng');
         $pagesize = 1;
         $page = 1;
-        $url = $this->obapiurl . '/propertyapi/v1.0.0/property/address?latitude=' . $lat . '&longitude=' . $lng . '&page=' . $page . '&pagesize=' . $pagesize.'&debug=True';
+        $url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?latitude=' . $lat . '&longitude=' . $lng . '&page=' . $page . '&pagesize=' . $pagesize;
         $result = $this->curlPOIAPI($url);
         $total = $result['status']['total'];
         $totalPages = $total / 1000;
@@ -225,7 +227,51 @@ class AjaxController extends Controller
         }
         return $schoolDetailData;
     }
+    public function SendEmail(Request $request)
+    {
 
+        $propertiesAddresList = $request->input("addressList");
+        $propertiesAddresList = json_decode($propertiesAddresList);
+        $viewsArray  =array();
+        foreach ($propertiesAddresList as $address)
+        {
+            array_push($viewsArray, (String)$this->MailPartialView($address[0],$address[1]));
+        }
+        $completeView = (String)view('mail')->with("viewsArray",$viewsArray);
+
+        return $this->sendMail($completeView);
+        return array("send");
+    }
+    private function MailPartialView($line1, $line2)
+    {
+        $result = $this->getallevent(urlencode($line1), urlencode($line2));
+        $AVMResult = $this->getdetailmortgageowner(urlencode($line1), urlencode($line2));
+        $psArray=array();
+        foreach ($AVMResult["property"] as $key=>$data)
+        {
+            $AssessmentHistory = $this->getAssessmentHistory($data["identifier"]["obPropId"]);
+            if($AssessmentHistory["property"] == null)
+            {
+
+            }
+            else
+                $psArray[$data["identifier"]["obPropId"]] = $AssessmentHistory["property"][0]["assessmenthistory"];
+        }
+        return view('mailPartial')->with('result',$result)->with("AVMResult",$AVMResult)->with("Assessment",$psArray);
+    }
+    private function sendMail($completeView)
+    {
+
+        try {
+            Mail::send([], [], function ($message) use ($completeView) {
+                $message->to("noufalsiddiqui@gmail.com", "To Noufal")->subject("Test Mail");
+                $message->from("app@urbaninfill.com", "urbaninfill")->setBody($completeView, 'text/html');
+            });
+        } catch (\Exception $e) {
+            return array($e->getMessage());
+        }
+        return array("send");
+    }
     private function getPropertyDetail($address){
         $address = urlencode($address);
         $url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?address='.$address.'&debug=True';

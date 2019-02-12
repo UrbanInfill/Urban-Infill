@@ -195,16 +195,7 @@ ul {
     background-color: transparent;
 }
 
-.btn {
-    text-transform: capitalize;
-    font-size: 22px;
-    font-family: 'Oswald', sans-serif;
-    padding: 10px 15px;
-    color: white;
-    border-radius: 0;
-    min-width: 130px;
-    transition: all .3s ease-in-out;
-}
+
 
 .btn:hover {
     color: white;
