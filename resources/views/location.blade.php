@@ -18,7 +18,7 @@
 
 
             <div class="col-md-8 col-xs-12 mt-30 ">
-                <h3>Legel Address</h3>
+                <h3>Legal Description</h3>
                 <p class="lead" id="LegalAddress">
 
                 </p>

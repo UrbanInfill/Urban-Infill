@@ -16,19 +16,20 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Home</a>
+    <a class="navbar-brand" href="/">Historically Platted Lots</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/location">Location</a>
-            </li>
             <li>
-                <a class="nav-link" href="/VacantProperties">Vacant lots</a>
+                <a class="nav-link" href="/VacantProperties">Vacant Lots</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/location">Address Search </a>
+            </li>
+
         </ul>
     </div>
 </nav>

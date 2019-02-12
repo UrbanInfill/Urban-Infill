@@ -95,26 +95,7 @@ function getlist(lat,lng,isVacant)
             for (let i = 1; i <= totalPages; i++) {
                 console.log(postData('/allpropertiesList', {lat: lat, lng: lng, page: i, zip: postalcode},isVacant));
             }
-            //getpageData(lat,lng,totalPages);
 
-            /* for (let i = 1; i <= totalPages; i++) {
-
-                 $.ajax({
-                     type: 'get',
-                     url: '/allpropertiesList',
-                     async:false,
-                     data: {lat: lat, lng: lng, page: i},
-                     success: function (data) {
-                         for (const property of data.property) {
-                             var text = '<div class="list-group-item list-group-item-action card"><div class="card-body"><h5 class="card-title">'+property['address']['oneLine']+'</h5><h6 class="card-subtitle mb-2 text-muted">'+property['summary']['legal1']+'</h6></div></div>';
-                             $("#listpro").append(text);
-                         }
-                         //console.log(data);
-
-                     },
-                     timeout: 5000
-                 });
-         }*/
         },
         timeout: 5000
     });
