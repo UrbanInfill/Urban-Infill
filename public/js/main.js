@@ -595,6 +595,8 @@ function codeAddress(address,isVacant = false) {
             }
             lat = results[0].geometry.location.lat();
             lng = results[0].geometry.location.lng()
+
+
             $.ajax({
                 type:'POST',
                 url:'/getzipdata',
@@ -608,7 +610,40 @@ function codeAddress(address,isVacant = false) {
                 complete:function(){
                     getlist(lat,lng,isVacant)
 
-                    $.ajax({
+
+                    fetch(buildUrl('/getHouseInventry',{lat : lat,lng:lng}), {
+                        method: "get", // *GET, POST, PUT, DELETE, etc.
+                        mode: "cors", // no-cors, cors, *same-origin
+                        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                        credentials: "same-origin", // include, *same-origin, omit
+                        headers: {
+                            "Content-Type": "application/json",
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            // "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        redirect: "follow", // manual, *follow, error
+                        referrer: "no-referrer", // no-referrer, *client
+                    })
+                        .then(function(response) {
+                            if (response.status >= 200 && response.status < 300) {
+                                return response.json()
+                            }
+                            throw new Error(response.statusText)
+                        })
+                        .then(function(data) {
+                            console.log(data);
+                            dountChart(data);
+                            $("#houseDiv").show();
+                            higherEdu(data);
+                            $("#eduDiv").show();
+                            incomeChart(data);
+                            $("#incomeDiv").show();
+                        })
+
+
+
+
+                   /* $.ajax({
                         type:'get',
                         url:'/getHouseInventry',
                         data:{lat : lat,lng:lng},
@@ -624,7 +659,7 @@ function codeAddress(address,isVacant = false) {
 
                         },
                         timeout: 5000
-                    });
+                    });*/
                 },
                 timeout: 5000
             });
@@ -637,13 +672,13 @@ function codeAddress(address,isVacant = false) {
 
 //Higher Education
 function higherEdu(communityData) {
-    $("#noHS").html(Math.round((100*(communityData['EDULTGR9']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
-    $("#someHS").html(Math.round((100*(communityData['EDUSHSCH']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
-    $("#hsGrad").html(Math.round((100*(communityData['EDUHSCH']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
-    $("#someCollege").html(Math.round((100*(communityData['EDUSCOLL']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
-    $("#associate").html(Math.round((100*(communityData['EDUASSOC']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
-    $("#bachlor").html(Math.round((100*(communityData['EDUBACH']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
-    $("#graduate").html(Math.round((100*(communityData['EDUGRAD']/communityData['EDUTOTALPOP'])).toFixed(2))+"%");
+    $("#noHS").html(Math.round((100*(communityData['EDULTGR9']/communityData['EDUTOTALPOP'])))+"%");
+    $("#someHS").html(Math.round((100*(communityData['EDUSHSCH']/communityData['EDUTOTALPOP'])))+"%");
+    $("#hsGrad").html(Math.round((100*(communityData['EDUHSCH']/communityData['EDUTOTALPOP'])))+"%");
+    $("#someCollege").html(Math.round((100*(communityData['EDUSCOLL']/communityData['EDUTOTALPOP'])))+"%");
+    $("#associate").html(Math.round((100*(communityData['EDUASSOC']/communityData['EDUTOTALPOP'])))+"%");
+    $("#bachlor").html(Math.round((100*(communityData['EDUBACH']/communityData['EDUTOTALPOP'])))+"%");
+    $("#graduate").html(Math.round((100*(communityData['EDUGRAD']/communityData['EDUTOTALPOP'])))+"%");
 
 }
 
@@ -656,16 +691,16 @@ function dountChart($communityData) {
         "type": "pie",
         "theme": "light",
         "dataProvider": [ {
-            "title": "Rented " + Math.round (100*($communityData['DWLRENT']/$communityData['DWLTOTAL'])).toFixed(2),
-            "value": Math.round (100*($communityData['DWLRENT']/$communityData['DWLTOTAL'])).toFixed(2),
+            "title": "Rented " + Math.round (100*($communityData['DWLRENT']/$communityData['DWLTOTAL'])),
+            "value": Math.round (100*($communityData['DWLRENT']/$communityData['DWLTOTAL'])),
             "color":'#0051FF'
         }, {
-            "title": "Owned "+Math.round (100*($communityData['DWLOWNED']/$communityData['DWLTOTAL'])).toFixed(2),
-            "value": Math.round (100*($communityData['DWLOWNED']/$communityData['DWLTOTAL'])).toFixed(2),
+            "title": "Owned "+Math.round (100*($communityData['DWLOWNED']/$communityData['DWLTOTAL'])),
+            "value": Math.round (100*($communityData['DWLOWNED']/$communityData['DWLTOTAL'])),
             "color":'#43575f'
         }, {
-            "title": "Vacant "+Math.round (100*($communityData['DWLVACNT']/$communityData['DWLTOTAL'])).toFixed(2),
-            "value": Math.round (100*($communityData['DWLVACNT']/$communityData['DWLTOTAL'])).toFixed(2),
+            "title": "Vacant "+Math.round (100*($communityData['DWLVACNT']/$communityData['DWLTOTAL'])),
+            "value": Math.round (100*($communityData['DWLVACNT']/$communityData['DWLTOTAL'])),
             "color":'#d6d6d6'
         } ],
         "titleField": "title",
@@ -687,6 +722,7 @@ function dountChart($communityData) {
 // income chart
 
 function incomeChart($communityData) {
+
     var chart = AmCharts.makeChart("chartincomediv", {
         "type": "xy",
         "theme": "light",
@@ -965,7 +1001,6 @@ $("#sendEmail").click((e)=>{
             $("#emailHelp").text("")
         }
     }
-    return "";
     $('input[name="selectedItem"]:checked').each(function() {
         listArray.push([$(this).closest('.box').find('a').attr('line1'),$(this).closest('.box').find('a').attr('line2')]);
     });
@@ -976,7 +1011,7 @@ $("#sendEmail").click((e)=>{
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
-        body: JSON.stringify({addressList:JSON.stringify(listArray)}),
+        body: JSON.stringify({addressList:JSON.stringify(listArray),email:$("#emailaddress").val() }),
         headers: {
             "Content-Type": "application/json",
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

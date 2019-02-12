@@ -231,6 +231,7 @@ class AjaxController extends Controller
     {
 
         $propertiesAddresList = $request->input("addressList");
+        $emailAdress = $request->input("email");
         $propertiesAddresList = json_decode($propertiesAddresList);
         $viewsArray  =array();
         foreach ($propertiesAddresList as $address)
@@ -239,7 +240,7 @@ class AjaxController extends Controller
         }
         $completeView = (String)view('mail')->with("viewsArray",$viewsArray);
 
-        return $this->sendMail($completeView);
+        return $this->sendMail($completeView,$emailAdress);
         return array("send");
     }
     private function MailPartialView($line1, $line2)
@@ -259,13 +260,13 @@ class AjaxController extends Controller
         }
         return view('mailPartial')->with('result',$result)->with("AVMResult",$AVMResult)->with("Assessment",$psArray);
     }
-    private function sendMail($completeView)
+    private function sendMail($completeView,$emailAdress)
     {
 
         try {
-            Mail::send([], [], function ($message) use ($completeView) {
-                $message->to("noufalsiddiqui@gmail.com", "To Noufal")->subject("Test Mail");
-                $message->from("app@urbaninfill.com", "urbaninfill")->setBody($completeView, 'text/html');
+            Mail::send([], [], function ($message) use ($completeView,$emailAdress) {
+                $message->to($emailAdress, $emailAdress)->subject("Test Mail");
+                $message->from("hustlenflown@gmail.com", "urbaninfill")->setBody($completeView, 'text/html');
             });
         } catch (\Exception $e) {
             return array($e->getMessage());
