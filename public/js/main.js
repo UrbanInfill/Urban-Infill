@@ -5,7 +5,7 @@ $("#eduDiv").hide();
 $("#incomeDiv").hide();
 $("#poiContent").hide();
 $('.toast').toast('show')
-// Ajax Requestsfas 
+// Ajax Requestsfas
 $.ajaxSetup({
 
     headers: {
@@ -722,160 +722,105 @@ function dountChart($communityData) {
 
 function incomeChart($communityData) {
 
-    var chart = AmCharts.makeChart("chartincomediv", {
-        "type": "xy",
-        "theme": "light",
-        "marginRight": 80,
-        "dataDateFormat": "YYYY-MM-DD",
-        "startDuration": 1.5,
-        "trendLines": [],
-        "balloon": {
-            "adjustBorderColor": false,
-            "shadowAlpha": 0,
-            "fixedPosition": true
-        },
-        "graphs": [{
-            "balloonText": "<div style='margin:5px;'><b>[[y]]</b></div>",
-            "bullet": "diamond",
-            "maxBulletSize": 25,
-            "lineAlpha": 0.8,
-            "lineThickness": 2,
-            "lineColor": "#0051FF",
-            "fillAlphas": 0,
-            "xField": "date",
-            "yField": "ay",
-            "valueField": "aValue"
-        }],
-        "valueAxes": [{
-            "id": "ValueAxis-1",
-            "axisAlpha": 0,
-            "labelsEnabled": false,
-            "title": "Number of Households"
-        }, {
-            "id": "ValueAxis-2",
-            "axisAlpha": 0,
-            "position": "bottom",
-            "labelsEnabled": false,
-            "title": "Annual Income"
 
-        }],
-        "allLabels": [],
-        "titles": [],
-        "dataProvider": [{
-            "date": 1,
-            "ay": $communityData['HINCY00_10'],
-            "by": 2.2,
-            "aValue": 15,
-            "bValue": 10
-        }, {
-            "date": 2,
-            "ay":  $communityData['HINCY10_15'],
-            "by": 4.9,
-            "aValue": 8,
-            "bValue": 3
-        }, {
-            "date": 3,
-            "ay": $communityData['HINCY15_20'],
-            "by": 5.1,
-            "aValue": 16,
-            "bValue": 4
-        }, {
-            "date": 5,
-            "ay": $communityData['HINCY20_25'],
-            "aValue": 9
-        }, {
-            "date": 7,
-            "by":  $communityData['HINCY25_30'],
-            "bValue": 13
-        }, {
-            "date": 10,
-            "ay": $communityData['HINCY30_35'],
-            "by": 13.3,
-            "aValue": 9,
-            "bValue": 13
-        }, {
-            "date": 12,
-            "ay": $communityData['HINCY35_40'],
-            "by": 6.1,
-            "aValue": 5,
-            "bValue": 2
-        }, {
-            "date": 13,
-            "ay": $communityData['HINCY40_45'],
-            "aValue": 10
-        }, {
-            "date": 15,
-            "ay": $communityData['HINCY45_50'],
-            "by": 10.5,
-            "aValue": 3,
-            "bValue": 10
-        }, {
-            "date": 16,
-            "ay":  $communityData['HINCY50_60'],
-            "by": 12.3,
-            "aValue": 5,
-            "bValue": 13
-        }, {
-            "date": 20,
-            "ay":$communityData['HINCY60_75'],
-            "by": 4.5,
-            "bValue": 11
-        }, {
-            "date": 22,
-            "ay":  $communityData['HINCY75_100'],
-            "by": 15,
-            "aValue": 15,
-            "bValue": 10
-        }, {
-            "date": 23,
-            "ay": $communityData['HINCY100_125'],
-            "by": 10.8,
-            "aValue": 1,
-            "bValue": 11
-        }, {
-            "date": 24,
-            "ay": $communityData['HINCY125_150'],
-            "by": 19,
-            "aValue": 12,
-            "bValue": 3
-        }, {
-            "date": 23,
-            "ay":  $communityData['HINCY150_200'],
-            "by": 10.8,
-            "aValue": 1,
-            "bValue": 11
-        }, {
-            "date": 24,
-            "ay":  $communityData['HINCY200_250'],
-            "by": 19,
-            "aValue": 12,
-            "bValue": 3
-        }, {
-            "date": 23,
-            "ay":  $communityData['HINCY250_500'],
-            "by": 10.8,
-            "aValue": 1,
-            "bValue": 11
-        }, {
-            "date": 24,
-            "ay":   $communityData['HINCYGT_500'],
-            "by": 19,
-            "aValue": 12,
-            "bValue": 3
-        }],
-        "export": {
-            "enabled": false
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["<10K", "10K-15K", "15K-20K", "20K-25K", "25K-30K", "30K-35K", "35K-40K", "40K-45K", "45K-50K", "50K-60K", "60K-75K", "75K-100K", "100K-125K", "125K-150K", "150K-200K", "200K-250K", "250K-500K", ">500K"],
+            datasets: [{
+                label: "",
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(0, 81, 255)',
+                data: [$communityData['HINCY00_10'],
+                    $communityData['HINCY10_15'],
+                    $communityData['HINCY15_20'],
+                    $communityData['HINCY20_25'],
+                    $communityData['HINCY25_30'],
+                    $communityData['HINCY30_35'],
+                    $communityData['HINCY35_40'],
+                    $communityData['HINCY40_45'],
+                    $communityData['HINCY45_50'],
+                    $communityData['HINCY50_60'],
+                    $communityData['HINCY60_75'],
+                    $communityData['HINCY75_100'],
+                    $communityData['HINCY100_125'],
+                    $communityData['HINCY125_150'],
+                    $communityData['HINCY150_200'],
+                    $communityData['HINCY200_250'],
+                    $communityData['HINCY250_500'],
+                    $communityData['HINCYGT_500']],
+            }]
         },
-        "chartScrollbar": {
-            "offset": 15,
-            "scrollbarHeight": 5
-        },
-        "chartCursor": {
-            "pan": false,
-            "cursorAlpha": 0,
-            "valueLineAlpha": 0
+
+        // Configuration options go here
+        options: {
+            responsive: true,
+            legend: {
+                display:false
+            },
+            title: {
+                display: false,
+                text: 'Chart.js Line Chart'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Annual Income',
+                        fontColor: 'black'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Number of Households',
+                        fontColor: 'black'
+                    }
+                }]
+            }
         }
     });
+
+
+    /*
+
+          $communityData['HINCY00_10'],
+           $communityData['HINCY10_15'],
+          $communityData['HINCY15_20'],
+          $communityData['HINCY20_25'],
+           $communityData['HINCY25_30'],
+          $communityData['HINCY30_35'],
+          $communityData['HINCY35_40'],
+          $communityData['HINCY40_45'],
+          $communityData['HINCY45_50'],
+           $communityData['HINCY50_60'],
+          communityData['HINCY60_75'],
+           $communityData['HINCY75_100'],
+          $communityData['HINCY100_125'],
+          $communityData['HINCY125_150'],
+           $communityData['HINCY150_200'],
+           $communityData['HINCY200_250'],
+           $communityData['HINCY250_500'],
+           $communityData['HINCYGT_500']
+
+
+        });*/
 }
 
 

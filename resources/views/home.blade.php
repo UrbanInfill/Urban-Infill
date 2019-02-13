@@ -67,7 +67,7 @@
                 <div class="col-md-12 brd" id="incomeDiv">
                     <h2 class="ageDemo mt-30">Income by Households</h2>
                     <div class="chart_bar" style="position: relative;height:150px;" >
-                        <div id="chartincomediv"> </div>
+                        <canvas id="myChart"></canvas>
                     </div>
                 </div>
 
