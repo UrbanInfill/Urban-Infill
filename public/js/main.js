@@ -4,9 +4,8 @@ $("#houseDiv").hide();
 $("#eduDiv").hide();
 $("#incomeDiv").hide();
 $("#poiContent").hide();
-
-// Ajax Requests
-
+$('.toast').toast('show')
+// Ajax Requestsfas 
 $.ajaxSetup({
 
     headers: {
@@ -1028,6 +1027,27 @@ $("#sendEmail").click((e)=>{
         })
         .then(function(data) {
             console.log(data);
+            if(data[0] == "send") {
+                $.notify({
+                    // options
+                    icon: 'fas fa-check-circle',
+                    message: 'Email Send Successfully'
+                }, {
+                    // settings
+                    type: 'success'
+                });
+            }
+            else
+            {
+                $.notify({
+                    // options
+                    icon: 'fa fa-exclamation-circle',
+                    message: 'Not able to send Email'
+                }, {
+                    // settings
+                    type: 'danger'
+                });
+            }
         })
 
 
