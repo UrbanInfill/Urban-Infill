@@ -26,7 +26,7 @@
 
                     <div class="col-md-6 brd" id="eduDiv">
 
-                        <img src="img/icon-stat.png" alt="">
+                        <img src="Img/icon-stat.png" alt="">
                         <h2 class="ageDemo mt-30">Highest education<br>level attained</h2>
                         <h3>Info</h3>
                         <p>The highest education level attained is based on the percentage of eligible graduates within the given population who have achieved the level of education listed.</p>

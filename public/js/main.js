@@ -482,7 +482,7 @@ function initMap(finalarray,lat,lng) {
         position: new google.maps.LatLng(lat, lng),
         map: map,
         animation: google.maps.Animation.DROP,
-        icon: 'img/4.png'
+        icon: 'Img/4.png'
     });
 
 
@@ -495,7 +495,7 @@ function initMap(finalarray,lat,lng) {
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
             map: map,
             animation: google.maps.Animation.DROP,
-            icon: 'img/1.png'
+            icon: 'Img/1.png'
         });
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -504,10 +504,10 @@ function initMap(finalarray,lat,lng) {
                 infowindow.open(map, marker);
                 for (var sm = 0; sm < gmarkers.length; sm++) {
                     if(sm!=0){
-                        gmarkers[sm].setIcon("img/1.png");
+                        gmarkers[sm].setIcon("Img/1.png");
                     }
                 }
-                marker.setIcon("img/2.png");
+                marker.setIcon("Img/2.png");
             }
         })(marker, i));
         gmarkers.push(marker);
