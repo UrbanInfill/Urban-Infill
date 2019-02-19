@@ -1,6 +1,4 @@
-<?php
-			require_once("getPoiData.blade.php");
-?>
+
 <div class="swiper-container">
 	<div class="swiper-wrapper">
 		<?php $initCounter = 1; 
@@ -101,7 +99,7 @@
 				position: new google.maps.LatLng('<?php echo $sourceLocationLatitude; ?>', '<?php echo $sourceLocationLongitude; ?>'),
 				map: map,
 				animation: google.maps.Animation.DROP,
-				icon: 'images/4.png'
+				icon: '/Img/4.png'
 			  });
 				
 				
@@ -131,14 +129,14 @@
 				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 				map: map,
 				animation: google.maps.Animation.DROP,
-				icon: 'images/'+catLocations[i]+'/1.png'
+				icon: '/Img/'+catLocations[i]+'/1.png'
 			  });
 			}else{
 				marker = new google.maps.Marker({
 				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
 				map: map,
 				animation: google.maps.Animation.DROP,
-				icon: 'images/'+catLocations[i]+'/3.png'
+				icon: '/Img/'+catLocations[i]+'/3.png'
 			  });
 			}
 				
@@ -152,13 +150,13 @@
 					console.log(gmarkers);
 					for (var sm = 1; sm < gmarkers.length; sm++) {
 						if(sm<4){
-							gmarkers[sm].setIcon("images/"+catLocations[sm-1]+"/1.png"); 
+							gmarkers[sm].setIcon("/Img/"+catLocations[sm-1]+"/1.png");
 						}else{
-							gmarkers[sm].setIcon("images/"+catLocations[sm-1]+"/3.png");  
+							gmarkers[sm].setIcon("/Img/"+catLocations[sm-1]+"/3.png");
 						}
 						
 					}
-					marker.setIcon("images/"+catLocations[i]+"/2.png");
+					marker.setIcon("/Img/"+catLocations[i]+"/2.png");
 				}
 			  })(marker, i)); 
 			  gmarkers.push(marker);

@@ -182,7 +182,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
                                     '<div class="float-right">'+
                                     '<input type="checkbox" name="selectedItem" aria-label="Checkbox for following text input">'+
-                                    '<input type="button" name="selectedItem" aria-label="Checkbox for following text input">'+
+                                    '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '</div>'+
                                     '<div class="restaurant-content">' +
                                     '<label>Legal Description</label>' +
@@ -220,7 +220,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
                                     '<div class="float-right">'+
                                     '<input type="checkbox" name="selectedItem" aria-label="Checkbox for following text input">'+
-                                    '<a><i class="fas fa-external-link-alt"></i></a>'+
+                                    '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '</div>'+
                                     '<div class="restaurant-content">' +
                                     '<label>Legal Description</label>' +

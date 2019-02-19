@@ -5,14 +5,111 @@ namespace App\Http\Controllers;
 use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use function PHPSTORM_META\elementType;
 use vendor\project\StatusTest;
 use Illuminate\Support\Facades\Mail;
 
 class AjaxController extends Controller
 {
     private $obapiurl = 'http://search.onboard-apis.com', $obapikey = '60dca8df1d5318fe0c262baf013f185e';
+    private function geocode($address){
+
+        // url encode the address
+        $address = urlencode($address);
+
+        // google map geocode api url
+        $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyCPAVKxutIiPNXJr8UeB2wwSrzrFA3-GuI";
+
+        // get the json response
+        $resp_json = file_get_contents($url);
+
+        // decode the json
+        $resp = json_decode($resp_json, true);
+
+        // response status will be 'OK', if able to geocode given address
+        if($resp['status']=='OK'){
+
+            // get the important data
+            $lati = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
+            $longi = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
+            $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
+
+            // verify if data is complete
+            if($lati && $longi && $formatted_address){
+
+                // put the data in the array
+                $data_arr = array();
+
+                array_push(
+                    $data_arr,
+                    $lati,
+                    $longi,
+                    $formatted_address
+                );
+
+                return $formatted_address;
+
+            }else{
+                return "false";
+            }
+
+        }
+
+        else{
+            //echo "<strong>ERROR: {$resp['status']}</strong>";
+            return "false";
+        }
+    }
+
+    public function PropertypoiData($line,$zip)
+    {
+        $businessCat ="";
+        $address = $this->geocode($line);
+        $address = $address.'; '.$zip;
+        $poiData = $this->getPoiData(urlencode($address),5);
+        $communityData = $this->getCommunityByAreaIdzip('ZI'.$zip);
+        $nearestSport = $communityData[0]->TEAM;
+        $nearestAirport = $communityData[0]->AIRPORT;
+
+        $distanceSortedArr = array();
+        $distanceSortedCatonlyArr = array();
+
+        if (@$poiData['response']['status']['code'] == 0) {
+            //$mapAmenities = $poiData['response']['result']['package']['item'];
+
+            $sourceLocationLatitude = $poiData['response']['result']['package']['item'][0]['geo_latitude'];
+            $sourceLocationLongitude = $poiData['response']['result']['package']['item'][0]['geo_longitude'];
+            foreach($poiData['response']['result']['package']['item'] as $amenities){
+                if($businessCat!='' && is_array($businessCat)){
+                    if(in_array(strtolower($amenities['business_category']),$businessCat)){
+                        $distanceSortedArr[$amenities['distance']][] = $amenities;
+                        $distanceSortedCatonlyArr[$amenities['distance']][] = strtolower(str_replace(array(" - "," "),array('-','-'),$amenities['business_category']));
+                        $amenitiesData[ucwords(strtolower($amenities['business_category']))][] = $amenities;
+                    }
+                }else{
+                    $distanceSortedArr[$amenities['distance']][] = $amenities;
+                    $amenitiesData[ucwords(strtolower($amenities['business_category']))][] = $amenities;
+                    $distanceSortedCatonlyArr[$amenities['distance']][] = strtolower(str_replace(array(" - "," "),array('-','-'),$amenities['business_category']));
+                }
+            }
+
+            ksort($amenitiesData);
+            ksort($distanceSortedArr);
+            ksort($distanceSortedCatonlyArr);
 
 
+            //echo '<pre>';print_r($distanceSortedArr);
+            //echo '<pre>';print_r($distanceSortedCatonlyArr);die;
+
+            $divideBy = round(count($amenitiesData)/2);
+            $splitAmenityData = array_chunk($amenitiesData,$divideBy,true);
+
+            return view("propertyPOI")->with('splitAmenityData',$splitAmenityData)->with('sourceLocationLongitude',$sourceLocationLongitude)->with('sourceLocationLatitude',$sourceLocationLatitude)->with('distanceSortedArr',$distanceSortedArr)->with('distanceSortedCatonlyArr',$distanceSortedCatonlyArr)->with('nearestSport',$nearestSport)->with('nearestAirport',$nearestAirport)->with('communityData',$communityData);
+        }
+        else{
+            return "no data";
+        }
+    }
     public function getzipResponse(Request $request)
     {
         $address = $request->input('address');
@@ -318,6 +415,31 @@ class AjaxController extends Controller
     private function getSchoolSamplePrivateCode($lat,$long){
         $url = $this->obapiurl ."/propertyapi/v1.0.0/school/snapshot?latitude=$lat&longitude=$long&radius=10&filetypetext=private&debug=True";
         return $this->curlPOIAPI($url);
+    }
+    public function getPoiData($address,$radius){
+        $url = $this->obapiurl ."/poisearch/v2.0.0/poi/street+address?StreetAddress=".$address."&SearchDistance=".$radius."&RecordLimit=50";
+        return $this->curlPOIAPI($url);
+    }
+
+    public function getCommunityByAreaIdzip($areaid)
+    {
+        $url = $this->obapiurl . "/communityapi/v2.0.0/area/full?AreaId=" . $areaid;
+
+        $result_community1 = $this->curlPOIAPI($url);
+
+        $communityData = array();
+
+        if(count(@$result_community1['response']['result']['package']['item'])>0){
+            foreach($result_community1['response']['result']['package']['item'][0] as $resultCommKey=>$resultCommVal){
+                $communityData[strtoupper($resultCommKey)] = $resultCommVal;
+            }
+        }
+
+        $communityData1[0] = $communityData;
+
+        $communityDataFinal = json_decode (json_encode ($communityData1), FALSE);
+
+        return $communityDataFinal;
     }
     private function curlPOIAPI($url, $apiKey = null){
 

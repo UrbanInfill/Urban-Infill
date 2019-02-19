@@ -14,7 +14,7 @@
 		<title>Point of Interest</title>
 		
 		<link rel="apple-touch-icon" href="apple-touch-icon.png">
-		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/Img/favicon.ico" type="image/x-icon">
 		
 		<!-- CDN call for CSS Start-->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700|Roboto:300,400" rel="stylesheet">
@@ -24,7 +24,7 @@
 		
 
 		<!-- css/main.css -->
-		<link rel="stylesheet" href="../../../../../Downloads/POI_Sample_Code-master%20(1)/POI_Sample_Code-master/css/main.css">
+		<link rel="stylesheet" href="/css/poimain.css">
 		<!-- endbuild -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!-- CDN call for JS Start-->	
@@ -35,20 +35,35 @@
 		
 	</head>
 	<!-- This div is used for display page loader untill full page is load -->
-	<div id="load"></div>
+
 
 	<body id="innerCont" class="home">
 		
 		<!-- Display loader image whe page will start loading start-->
-		<div style="display:none" class="ajax-loader">
-		  <img src="../../../../../Downloads/POI_Sample_Code-master%20(1)/POI_Sample_Code-master/images/35.gif" class="img-responsive" />
+		<div  class="ajax-loader">
+		  <img src="/img/35.gif" class="img-responsive" />
 		</div>	
 		<!-- Display loader image when page will start loading end-->
-		
-		<?php
-			require_once("getPoiData.blade.php");
-		?>
-    <div style="visibility:hidden;"  id="header">
+
+		<nav class="navbar navbar-inverse">
+			
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="nav-item">
+						<a class="navbar-brand" href="/">Historically Platted Lots</a>
+					</li>
+					<li>
+						<a class="nav-link" href="/VacantProperties">Vacant Lots</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/location">Address Search </a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+    <div   id="header">
         <span>
             Points of Interest
         </span>
@@ -56,46 +71,9 @@
     <!-- /.header -->
 
     <!-- body -->
-    <div style="visibility:hidden;" id="body">
+    <div  id="body">
         <div class="container">
             <div class="row">
-				<div class="col-md-7 col-xs-12 col-md-offset-3">
-                    <div class="search search-reduce" id="searchByPropForm">
-						
-						<input class="form-control" id="search" type="text" placeholder="By Property"  onFocus="geolocate()" required="true" value="<?php echo urldecode($addressPosted); ?>"/>
-						
-						<input type="hidden" id="radius" name="radius" value="5">
-						 <div class="dropdown">
-							<button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Radius in Miles
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-								<li><a href="javascript:void(0);" data-val="0.5">0.5 Mile</a></li>
-								<li><a href="javascript:void(0);" data-val="1">1 Mile</a></li>
-								<li><a href="javascript:void(0);" data-val="2">2 Miles</a></li>
-								<li><a href="javascript:void(0);" data-val="3">3 Miles</a></li>
-								<li><a href="javascript:void(0);" data-val="4">4 Miles</a></li>
-								<li><a href="javascript:void(0);" data-val="5">5 Miles</a></li>
-								<li><a href="javascript:void(0);" data-val="10">10 Miles</a></li>
-								<li><a href="javascript:void(0);" data-val="15">15 Miles</a></li>
-								<li><a href="javascript:void(0);" data-val="20">20 Miles</a></li>
-								
-							</ul>
-						</div> 
-                        <input class="btn btn-primary" type="button" value="Search" id="searchByProperty">
-						<span class="customerror"></span>
-                    </div>
-                </div>
-                <!--<div class="col-md-7 col-xs-12">
-                    <div class="search" id="estimateForm">
-                     
-						<input class="form-control" type="text" placeholder="Enter City,Zip or Neighborhood" id="city_zip" required="true">
-						<input type="hidden" name="postal_code" id="postal_code" value="">
-						<input class="btn btn-primary" id="getEstimate" type="button" value="Search">
-						
-						<span class="customerrorCity"></span>
-						
-                    </div>
-                </div>-->
 				<div class="col-md-8 col-xs-12 mt-30">
 					<?php  if(count($splitAmenityData) == 1){?>
 						<div class="box selecting-area noBorder">
@@ -113,7 +91,7 @@
 							<?php foreach($amenityVal as $k=>$v){ ?>	
 									<div class="form-group">
 										<input type="checkbox" id="<?php echo strtolower($k); ?>" name="checkBuisnessCat" value="<?php echo strtolower($k); ?>"/>
-										<label for="<?php echo strtolower($k); ?>" class="businessCatAction"><span><img src="images/icons/<?php echo strtolower($k); ?>.png" /></span><?php echo $k; ?> (<?php echo count($v); ?>)</label>
+										<label for="<?php echo strtolower($k); ?>" class="businessCatAction"><span><img src="/Img/icons/<?php echo strtolower($k); ?>.png" /></span><?php echo $k; ?> (<?php echo count($v); ?>)</label>
 									</div>
 							<?php } ?>
 							</div>
@@ -121,10 +99,10 @@
 						
 						<div class="col-xs-12 col-md-12 extra-area">
 							<!--<div class="col-xs-12 col-md-6 text-center">
-								<img src="images/icons/ball.png" alt="" /> <label>Show nearest major <br />sport team</label>
+								<img src="Img/icons/ball.png" alt="" /> <label>Show nearest major <br />sport team</label>
 							</div>
 							<div class="col-xs-12 col-md-6 text-center">
-								<img src="images/icons/flight.png" alt="" /> <label>Show nearest major <br />airport</label>
+								<img src="Img/icons/flight.png" alt="" /> <label>Show nearest major <br />airport</label>
 							</div>-->
 							<div class="col-xs-12 col-md-6" style="padding-left:25px">
 								<label>Closest Major Sports Team : <?php echo $nearestSport; ?></label>
@@ -140,10 +118,10 @@
 					</div>
 				</div>
 				<!-- Swiper -->
-				<script src="../../../../../Downloads/POI_Sample_Code-master%20(1)/POI_Sample_Code-master/js/main.js"></script>
 				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPAVKxutIiPNXJr8UeB2wwSrzrFA3-GuI&libraries=places&callback=initAutocomplete"></script>
 				<div class="col-md-4 col-xs-12 col-xs-12 mt-30" id="poiContent">
-					<?php include_once('poi-content.blade.php'); ?>
+
+					@include("poi-content",['splitAmenityData'=>$splitAmenityData,'sourceLocationLatitude' =>$sourceLocationLatitude,'sourceLocationLongitude'=> $sourceLocationLongitude ,'distanceSortedArr'=>$distanceSortedArr ,'distanceSortedCatonlyArr'=>$distanceSortedCatonlyArr ,'nearestSport'=>$nearestSport ,'nearestAirport'=>$nearestAirport ,'communityData'=>$communityData ,])
 				</div>
     </div>
 			
