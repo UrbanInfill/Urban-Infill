@@ -53,7 +53,7 @@ class AjaxController extends Controller
         $page = $request->input('page');
         $zip = $request->input('zip');
         $zip = urlencode($zip);
-        $pagesize = 1000;
+        $pagesize = 100;
         $url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?latitude=' . $lat . '&longitude=' . $lng . '&page=' . $page . '&pagesize=' . $pagesize .'&debug=True';
         //$url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?postalcode=' . $zip . '&page=' . $page . '&pagesize=' . $pagesize;
         $result = $this->curlPOIAPI($url);
@@ -101,7 +101,7 @@ class AjaxController extends Controller
         $url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?latitude=' . $lat . '&longitude=' . $lng . '&page=' . $page . '&pagesize=' . $pagesize;
         $result = $this->curlPOIAPI($url);
         $total = $result['status']['total'];
-        $totalPages = $total / 1000;
+        $totalPages = $total / 100;
         return response($totalPages);
     }
     public function getPropertyResponse(Request $request)
