@@ -372,9 +372,11 @@ function f(locations) {
             return function() {
                 infowindow.setContent(locations[i][2]);
                 infowindow.open(map, markers);
-
+                swiper.slideTo(markers.get("id"));
+                swiper.updateSlidesClasses();
             }
         })(markers, i))
+        markers.set("id",homemarkers.length)
         homemarkers.push(markers);
     }
 
