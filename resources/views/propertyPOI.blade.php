@@ -46,7 +46,7 @@
 		<!-- Display loader image when page will start loading end-->
 
 		<nav class="navbar navbar-inverse">
-			
+
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">

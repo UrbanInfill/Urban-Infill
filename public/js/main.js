@@ -167,6 +167,7 @@ function postData(url = ``, data = {},isVacant) {
         })
         .then(function(data) {
             console.log(data);
+            let location = [];
             if(data) {
                 $("#poiContent").show();
 
@@ -188,6 +189,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<label>Legal Description</label>' +
                                     '<small>' + property['summary']['legal1'] + '</small></div></div></div>';
                                 $(".swiper-wrapper").append(text);
+                                location.push([property["location"]['latitude'],property["location"]['longitude'],property['address']['oneLine']]);
                             }
                         }
 
@@ -226,6 +228,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<label>Legal Description</label>' +
                                     '<small>' + property['summary']['legal1'] + '</small></div></div></div>';
                                 $(".swiper-wrapper").append(text);
+                                location.push([property["location"]['latitude'],property["location"]['longitude'],property['address']['oneLine']]);
                             } /*else if (result2) {
                                 var text = '<div class="swiper-slide" ajaxlink= "/getOwnerDetail/'+property["address"]["line1"]+'/' +property["address"]["line2"]+'"\>' +
                                     '<div class="box selectPOI" id="5">' +
@@ -280,7 +283,7 @@ function postData(url = ``, data = {},isVacant) {
                     }
                 }
             }
-            f();
+            f(location);
         })
 }
 var ipage =1;
@@ -338,8 +341,8 @@ function getpageData(lat,lng,totalpage) {
 }
 
 
-
-function f() {
+var homemarkers = [];
+function f(locations) {
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 5,
         direction: 'vertical',
@@ -347,7 +350,7 @@ function f() {
         on:{
             click: function(swiper, e){
                // var clicked = $(e.target);
-                //openInfoModal(this.clickedIndex+1);
+                focusonmarker(this.clickedIndex);
                 //console.log(clicked);
             },
         },
@@ -356,8 +359,30 @@ function f() {
             prevEl: '.next-slide',
         }
     });
-}
+    var infowindow = new google.maps.InfoWindow();
+    for (let i = 0; i < locations.length; i++)
+    {
+        var markers = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+            animation: google.maps.Animation.DROP,
+            map: map,
+            icon: 'Img/icons/pin_b.png'
+        });
+        google.maps.event.addListener(markers, 'click', (function(markers, i) {
+            return function() {
+                infowindow.setContent(locations[i][2]);
+                infowindow.open(map, markers);
 
+            }
+        })(markers, i))
+        homemarkers.push(markers);
+    }
+
+
+}
+function focusonmarker(i) {
+    google.maps.event.trigger(homemarkers[i], "click");
+}
 function f1() {
 
     var swiper = new Swiper('.swiper-container', {
@@ -450,7 +475,7 @@ function f1() {
     $('#detailViews').html( detailViews[0]);
 }
 
-
+var marker;
 var gmarkers = [];
 function initMap(finalarray,lat,lng) {
     var locations = [];
@@ -469,7 +494,7 @@ function initMap(finalarray,lat,lng) {
         }
     }
 
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: new google.maps.LatLng(lat, lng),
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -477,7 +502,7 @@ function initMap(finalarray,lat,lng) {
 
     var infowindow = new google.maps.InfoWindow();
 
-    var marker, i;
+     var i;
     //console.log(locations);
 
     marker = new google.maps.Marker({
@@ -860,16 +885,17 @@ function parsePolyStrings(ps) {
     //array of arrays of LatLng objects, or empty array
     return arr;
 }
-
+var map;
 function init() {
-    var i, tmp,
-        myOptions = {
-            zoom: 13,
-            center: new google.maps.LatLng(lat, lng)
-        },
-        map = new google.maps.Map(document.getElementById("map"), myOptions)
+    var i;
+    var tmp;
+    var myOptions = {
+        zoom: 13,
+        center: new google.maps.LatLng(lat, lng)
+    };
+    map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-    var marker;
+    marker;
     //console.log(locations);
 
     marker = new google.maps.Marker({
@@ -893,6 +919,7 @@ function init() {
         }
     }
     $('#map').css('height','450px');
+    return map;
 }
 
 
