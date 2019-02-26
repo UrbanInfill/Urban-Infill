@@ -378,13 +378,22 @@ function f(locations) {
         })(markers, i))
         markers.set("id",homemarkers.length)
         homemarkers.push(markers);
+        focusonmarker(0);
     }
 
 
 }
 function focusonmarker(i) {
+    setMapOnAll(null)
+    homemarkers[i].setMap(map);
     google.maps.event.trigger(homemarkers[i], "click");
 }
+function setMapOnAll(map) {
+    for (var i = 0; i < homemarkers.length; i++) {
+        homemarkers[i].setMap(map);
+    }
+}
+
 function f1() {
 
     var swiper = new Swiper('.swiper-container', {
