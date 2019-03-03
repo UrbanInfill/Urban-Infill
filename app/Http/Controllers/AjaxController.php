@@ -375,10 +375,10 @@ class AjaxController extends Controller
         try {
             Mail::send([], [], function ($message) use ($completeView,$emailAdress) {
                 $message->to($emailAdress, $emailAdress)->subject("Property List");
-                $message->from("UrbanInfillApp@gmail.com", "urbaninfill")->setBody($completeView, 'text/html');
+                $message->from("noufalsiddiqui@gmail.com", "urbaninfill")->setBody($completeView, 'text/html');
             });
         } catch (\Exception $e) {
-            return array([$e->getMessage(),"UrbanInfillApp@gmail.com"]);
+            return array([$e->getMessage(),"UrbanInfillApp@gmaisl.com"]);
         }
         return array("send");
     }
