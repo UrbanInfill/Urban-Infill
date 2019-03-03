@@ -366,7 +366,7 @@ class AjaxController extends Controller
                 $message->from("UrbanInfillApp@gmail.com", "urbaninfill")->setBody($completeView, 'text/html');
             });
         } catch (\Exception $e) {
-            return array([$e->getMessage(),"noufalsiddiqui@gmail.com"]);
+            return array([$e->getMessage(),"UrbanInfillApp@gmail.com"]);
         }
         return array("send");
     }
