@@ -33,7 +33,13 @@ class AjaxController extends Controller
             $lati = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
             $longi = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
             $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
-
+            $addressComponents = $resp['results'][0]['address_components'];
+            foreach($addressComponents as $addrComp){
+                if($addrComp['types'][0] == 'postal_code'){
+                    //Return the zipcode
+                    $zip =  $addrComp['long_name'];
+                }
+            }
             // verify if data is complete
             if($lati && $longi && $formatted_address){
 
@@ -47,7 +53,7 @@ class AjaxController extends Controller
                     $formatted_address
                 );
 
-                return $formatted_address;
+                return $formatted_address.'; '.$zip;
 
             }else{
                 return "false";
@@ -65,7 +71,6 @@ class AjaxController extends Controller
     {
         $businessCat ="";
         $address = $this->geocode($line);
-        $address = $address.'; '.$zip;
         $poiData = $this->getPoiData(urlencode($address),5);
         $communityData = $this->getCommunityByAreaIdzip('ZI'.$zip);
         $nearestSport = $communityData[0]->TEAM;
@@ -150,7 +155,7 @@ class AjaxController extends Controller
         $page = $request->input('page');
         $zip = $request->input('zip');
         $zip = urlencode($zip);
-        $pagesize = 1000;
+        $pagesize = 100;
         $url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?latitude=' . $lat . '&longitude=' . $lng . '&page=' . $page . '&pagesize=' . $pagesize .'&debug=True';
         //$url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?postalcode=' . $zip . '&page=' . $page . '&pagesize=' . $pagesize;
         $result = $this->curlPOIAPI($url);
@@ -198,16 +203,20 @@ class AjaxController extends Controller
         $url = $this->obapiurl . '/propertyapi/v1.0.0/property/detail?latitude=' . $lat . '&longitude=' . $lng . '&page=' . $page . '&pagesize=' . $pagesize;
         $result = $this->curlPOIAPI($url);
         $total = $result['status']['total'];
-        $totalPages = $total / 1000;
+        $totalPages = $total / 100;
         return response($totalPages);
     }
     public function getPropertyResponse(Request $request)
     {
 
         $address = $request->input('address');
-        $propertyInfo = $this->getPropertyDetail($address);
-        $final_array = $this->getSchoolDemographicData($propertyInfo["property"][0]["location"]["latitude"],$propertyInfo["property"][0]["location"]["longitude"],$propertyInfo["property"][0]["address"]["line1"],$propertyInfo["property"][0]["address"]["line2"]);
+        //$address = ;
 
+        $address =  $this->geocode($address);
+        $propertyInfo = $this->getPropertyDetail($address);
+
+        $final_array = $this->getSchoolDemographicData($propertyInfo["property"][0]["location"]["latitude"],$propertyInfo["property"][0]["location"]["longitude"],$propertyInfo["property"][0]["address"]["line1"],$propertyInfo["property"][0]["address"]["line2"]);
+        //return $final_array;
         //$context = array("legaladdress" => $propertyInfo["property"][0]["summary"]["legal1"], "view" => view('schoolPartialView')->with("$final_array",$final_array));
         $psArray=array();
         $psArray["legaladdress"] =$propertyInfo["property"][0]["summary"]["legal1"];
@@ -232,6 +241,7 @@ class AjaxController extends Controller
     private function getSchoolDemographicData($lat,$lng,$line1,$line2)
     {
         $allPrivateSchools = $this->getSchoolSamplePrivateCode($lat,$lng);
+
         $psArray=array();
         if ($allPrivateSchools['status']['code'] == 0) {
 
@@ -247,18 +257,20 @@ class AjaxController extends Controller
                 $psArray[$pvt_s]['distance'] = $private_school['School']['distance'];
             }
         }
-        $allPublicSchools = $this->getSchoolSampleCode(urlencode($line1),urlencode($line2));
-        if ($allPublicSchools['status']['code'] == 0) {
-            if(!empty($allPublicSchools['property'][0]["school"])){
+        //$allPublicSchools = $this->getSchoolSampleCode(urlencode($line1),urlencode($line2));
+        //return $allPublicSchools;
+        //if ($allPublicSchools['status']['code'] == 0) {
+         //   if(!empty($allPublicSchools['property'][0]["school"])){
 
                 if(!empty($psArray)){
 
-                    $final_array = array_merge($allPublicSchools['property'][0]["school"],$psArray);
+                    $final_array = $psArray;
                 }else{
                     $final_array = $allPublicSchools['property'][0]["school"];
                 }
                 $index = 0;
                 foreach($final_array as $k=>$schoolVal){
+
                     if(!isset($schoolVal['OBInstID'])){
                         continue;
                     }
@@ -277,8 +289,8 @@ class AjaxController extends Controller
                     }
 
 
-                }
-            }
+              //  }
+            //}
         }
         return $final_array;
     }
