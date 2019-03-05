@@ -75,8 +75,8 @@
 
 
             <div class="col-6 mt-30" id="poiContent">
-                <div class="input-group mb-3">
-                    <input style="padding-right: 10px;" type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
+                <div class="input-group mb-3"  style="padding-right: 10px;">
+                    <input type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
                     <div class="input-group-append">
                         <button type="button" id="sendEmail" class="btn btn-secondary mb-1"><i class="far fa-envelope"></i></button>
                     </div>
