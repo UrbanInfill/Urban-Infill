@@ -3,7 +3,7 @@
 @section('content')
     <div class="pt-3">
         <div class="row">
-            <div class="col-md-9 col-xs-12 col-md-offset-3">
+            <div class="col-6">
                 <div class="input-group mb-3 search search-reduce" id="searchByPropForm">
                     <input class="form-control" id="search" name="address" type="text" placeholder="By Property"  onFocus="geolocate()" required="true" value="" aria-describedby="searchByProperty"/>
                     <div class="input-group-append">
@@ -68,7 +68,7 @@
             </div>
 
 
-            <div class="col-md-3 col-xs-12 col-xs-12 mt-30" id="poiContent">
+            <div class="col-6 mt-30" id="poiContent">
                 <div class="input-group mb-3">
                     <input type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
                     <div class="input-group-append">
