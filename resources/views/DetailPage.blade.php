@@ -10,6 +10,9 @@
                     <h4>{{$WholePropertydata["address"]["line1"]}}</h4>
                     <h7>{{$WholePropertydata["address"]["line2"]}}</h7>
                 </div>
+                <div>
+                    <img width="600" height="300" src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location= {{$WholePropertydata["location"]["latitude"]}} ,{{$WholePropertydata["location"]["longitude"]}}&pitch=-0.76&key=AIzaSyD1rCmHXfPl5Q6PwzrcoIF8aEeAVCN-D_A" alt="">
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
