@@ -76,7 +76,7 @@
 
             <div class="col-6 mt-30" id="poiContent">
                 <div class="input-group mb-3">
-                    <input type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
+                    <input style="padding-right: 10px;" type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
                     <div class="input-group-append">
                         <button type="button" id="sendEmail" class="btn btn-secondary mb-1"><i class="far fa-envelope"></i></button>
                     </div>
@@ -94,8 +94,8 @@
                 </div>
                 <!--<div class="swiper-button-next"><img src="images/icons/right.png" alt="right"></div>
                 <div class="swiper-button-prev"><img src="images/icons/left.png" alt="left"></div>-->
-                <div class="next-slide"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
-                <div class="prev-slide"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+                <div class="next-slide"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size: 25px;"></i></div>
+                <div class="prev-slide"><i class="fa fa-arrow-circle-down" aria-hidden="true" style="font-size: 25px;"></i></div>
 
 
 
