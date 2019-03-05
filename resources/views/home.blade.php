@@ -94,8 +94,8 @@
                 </div>
                 <!--<div class="swiper-button-next"><img src="images/icons/right.png" alt="right"></div>
                 <div class="swiper-button-prev"><img src="images/icons/left.png" alt="left"></div>-->
-                <div class="next-slide"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size: 25px;"></i></div>
-                <div class="prev-slide"><i class="fa fa-arrow-circle-down" aria-hidden="true" style="font-size: 25px;"></i></div>
+                <div class="next-slide"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size: 20px;"></i></div>
+                <div class="prev-slide"><i class="fa fa-arrow-circle-down" aria-hidden="true" style="font-size: 20px;"></i></div>
 
 
 
