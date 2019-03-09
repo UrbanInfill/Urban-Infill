@@ -103,6 +103,8 @@ function getlist(lat,lng,isVacant)
     .then(function(data) {
         totalPages = data;
         console.log(data);
+        searchCount = 0;
+        $("#poiContent").hide();
         for (let i = 1; i <= totalPages; i++) {
             console.log(postData('/allpropertiesList', {lat: lat, lng: lng, page: i, zip: postalcode},isVacant));
         }
@@ -144,6 +146,7 @@ function buildUrl(url, parameters,isVacant) {
 
     return url;
 }
+let searchCount = 0
 function postData(url = ``, data = {},isVacant) {
     // Default options are marked with *
     fetch(buildUrl(url,data), {
@@ -169,15 +172,19 @@ function postData(url = ``, data = {},isVacant) {
             console.log(data);
             let location = [];
             if(data) {
-                $("#poiContent").show();
+
 
                 for (const property of data.property) {
                     if(property["address"]["postal1"] != postalcode)
                         continue;
                     if(isVacant)
                     {
+
                         if(property['summary']['propclass']){
                             if(property['summary']['propclass'] .toLowerCase() ==="vacant") {
+                                searchCount++;
+                                $('#searchCount').text("Property count : "+searchCount);
+                                $("#poiContent").show();
                                 var text = '<div class="swiper-slide">'  +
                                     '<div class="box selectPOI">' +
                                     '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
@@ -217,6 +224,9 @@ function postData(url = ``, data = {},isVacant) {
                             var result9 = property['summary']['legal1'].match(patt8);
                             var result10 = property['summary']['legal1'].match(patt9);
                             if (result || result2 || result3 || result4 || result5 || result6 || result7 || result8|| result9 || result10) {
+                                searchCount++;
+                                $('#searchCount').text("Property count : "+searchCount);
+                                $("#poiContent").show();
                                 var text = '<div class="swiper-slide">'  +
                                     '<div class="box selectPOI">' +
                                     '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +

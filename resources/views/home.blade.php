@@ -75,6 +75,9 @@
 
 
             <div class="col-6 mt-30" id="poiContent">
+                <div class="alert alert-dark" role="alert" id="searchCount">
+                    Count :
+                </div>
                 <div class="input-group mb-3"  style="padding-right: 10px;">
                     <input type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
                     <div class="input-group-append">
@@ -154,7 +157,7 @@
             padding: 0;
             position: absolute;
             right: 0;
-            top: 0;
+            top: 55px;
             cursor:pointer;
         }
         .prev-slide{
@@ -162,7 +165,7 @@
             padding: 0;
             right: 0;
             position: absolute;
-            top: 25px;
+            top:80px;
             cursor:pointer;
         }
     </style>
