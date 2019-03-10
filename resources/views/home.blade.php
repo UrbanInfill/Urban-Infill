@@ -140,7 +140,7 @@
                 el: '.swiper-scrollbar',
                 hide: true,
             },mousewheel: {
-                invert: true,
+                invert: false,
             },
         });
 

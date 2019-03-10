@@ -372,7 +372,7 @@ function f(locations) {
             hide: true,
         },
         mousewheel: {
-            invert: true,
+            invert: false,
         },
     });
     var infowindow = new google.maps.InfoWindow();
