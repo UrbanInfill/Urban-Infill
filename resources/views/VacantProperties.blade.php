@@ -69,6 +69,9 @@
 
 
             <div class="col-6 mt-30" id="poiContent">
+                <div class="alert alert-dark" role="alert" id="searchCount">
+                    Count :
+                </div>
                 <div class="input-group mb-3"  style="padding-right: 10px;">
                     <input type="email" id="emailaddress" class=" form-control" placeholder="Enter Email Address" aria-label="Enter Email Address aria-describedby="sendEmail">
                     <div class="input-group-append">
@@ -83,6 +86,8 @@
                     </div>
                     <!-- Add Arrows -->
                     <!-- Add Pagination -->
+
+                    <div class="swiper-scrollbar"></div>
                 </div>
                 <!--<div class="swiper-button-next"><img src="images/icons/right.png" alt="right"></div>
                 <div class="swiper-button-prev"><img src="images/icons/left.png" alt="left"></div>-->
