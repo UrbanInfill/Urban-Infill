@@ -404,7 +404,7 @@ function f(locations) {
 
 }
 function focusonmarker(i) {
-    if(i)
+    if(!i)
         return;
     setMapOnAll(null)
     homemarkers[i].setMap(map);
