@@ -130,7 +130,7 @@
                     // var clicked = $(e.target);
                     //openInfoModal(this.clickedIndex+1);
                     //console.log(clicked);
-                },sliderMove: function (swiper) {
+                },slideChangeTransitionEnd: function (swiper) {
                     focusonmarker(swiper.activeIndex);
 
                 }

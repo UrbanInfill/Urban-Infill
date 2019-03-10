@@ -363,7 +363,7 @@ function f(locations) {
                 focusonmarker(this.clickedIndex);
                 //console.log(clicked);
             },
-            sliderMove: function (swiper) {
+            slideChangeTransitionEnd: function (swiper) {
                 focusonmarker(swiper.activeIndex);
 
             }
@@ -404,7 +404,7 @@ function f(locations) {
 
 }
 function focusonmarker(i) {
-    
+
     setMapOnAll(null)
     homemarkers[i].setMap(map);
     google.maps.event.trigger(homemarkers[i], "click");
