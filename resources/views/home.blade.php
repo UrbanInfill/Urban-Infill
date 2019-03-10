@@ -94,6 +94,7 @@
 
                     <!-- Add Arrows -->
                     <!-- Add Pagination -->
+                    <div class="swiper-scrollbar"></div>
                 </div>
                 <!--<div class="swiper-button-next"><img src="images/icons/right.png" alt="right"></div>
                 <div class="swiper-button-prev"><img src="images/icons/left.png" alt="left"></div>-->
@@ -134,7 +135,11 @@
             navigation: {
                 nextEl: '.prev-slide',
                 prevEl: '.next-slide',
-            }
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                hide: true,
+            },
         });
 
     </script>

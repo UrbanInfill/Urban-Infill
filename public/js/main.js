@@ -367,7 +367,10 @@ function f(locations) {
         navigation: {
             nextEl: '.prev-slide',
             prevEl: '.next-slide',
-        }
+        },scrollbar: {
+            el: '.swiper-scrollbar',
+            hide: true,
+        },
     });
     var infowindow = new google.maps.InfoWindow();
     for (let i = 0; i < locations.length; i++)
