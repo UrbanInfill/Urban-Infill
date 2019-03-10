@@ -131,7 +131,7 @@
                     //openInfoModal(this.clickedIndex+1);
                     //console.log(clicked);
                 },slideChangeTransitionEnd: function (swiper) {
-                    focusonmarker(swiper.activeIndex);
+                    focusonmarker(this.activeIndex);
 
                 }
             },
