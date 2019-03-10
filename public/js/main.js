@@ -404,6 +404,8 @@ function f(locations) {
 
 }
 function focusonmarker(i) {
+    if(i)
+        return;
     setMapOnAll(null)
     homemarkers[i].setMap(map);
     google.maps.event.trigger(homemarkers[i], "click");
