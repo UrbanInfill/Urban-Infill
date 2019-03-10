@@ -42,6 +42,7 @@
 
 @section('script')
     <script>
-
+        $('.nav-link').removeClass("active");
+        $("#menu3").addClass("active");
     </script>
 @endsection

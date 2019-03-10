@@ -16,7 +16,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Historically Platted Lots</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,10 +24,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li>
-                <a class="navbar-brand" href="/VacantProperties">Vacant Lots</a>
+                <a class="nav-link active" id="menu1" href="/">Historically Platted Lots</a>
+            </li>
+            <li>
+                <a class="nav-link " id="menu2" href="/VacantProperties">Vacant Lots</a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" href="/location">Address Search </a>
+                <a class="nav-link " id="menu3" href="/location">Address Search </a>
             </li>
 
         </ul>

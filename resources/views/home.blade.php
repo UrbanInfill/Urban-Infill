@@ -146,7 +146,8 @@
                 invert: false,
             },
         });
-
+        $('.nav-link').removeClass("active");
+        $("#menu1").addClass("active");
     </script>
 
     <style>

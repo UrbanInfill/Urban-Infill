@@ -110,7 +110,8 @@
     <script type='text/javascript' src="js/donut-chart.js"></script>
     <script>
 
-
+        $('.nav-link').removeClass("active");
+        $("#menu2").addClass("active");
     </script>
 
     <style>
