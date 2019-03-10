@@ -130,7 +130,10 @@
                     // var clicked = $(e.target);
                     //openInfoModal(this.clickedIndex+1);
                     //console.log(clicked);
-                },
+                },sliderMove: function (swiper) {
+                    focusonmarker(swiper.activeIndex);
+
+                }
             },
             navigation: {
                 nextEl: '.prev-slide',

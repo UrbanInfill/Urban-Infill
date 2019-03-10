@@ -363,6 +363,10 @@ function f(locations) {
                 focusonmarker(this.clickedIndex);
                 //console.log(clicked);
             },
+            sliderMove: function (swiper) {
+                focusonmarker(swiper.activeIndex);
+
+            }
         },
         navigation: {
             nextEl: '.prev-slide',
