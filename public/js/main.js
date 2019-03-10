@@ -371,6 +371,9 @@ function f(locations) {
             el: '.swiper-scrollbar',
             hide: true,
         },
+        mousewheel: {
+            invert: true,
+        },
     });
     var infowindow = new google.maps.InfoWindow();
     for (let i = 0; i < locations.length; i++)

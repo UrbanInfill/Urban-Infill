@@ -139,6 +139,8 @@
             scrollbar: {
                 el: '.swiper-scrollbar',
                 hide: true,
+            },mousewheel: {
+                invert: true,
             },
         });
 
