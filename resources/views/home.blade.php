@@ -158,7 +158,7 @@
         });
         $('.nav-link').removeClass("active");
         $("#menu1").addClass("active");
-        $('.selectedProperty').change(function() {
+        $(document).on("change", ".selectedProperty", function () {
             console.log( $('input:checkbox:checked').length);
         });
     </script>
