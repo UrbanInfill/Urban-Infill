@@ -482,7 +482,7 @@ body .swiper-button-next,
 body .swiper-button-prev{background-image: none;top:0;}
 body .swiper-button-next {right: -15px;}
 body .swiper-button-prev {left: -5px;}
-body .swiper-container {overflow: hidden; height:700px;}
+body .swiper-container {overflow: hidden; height:900px;}
 .swiper-container .box.active .h3 {
     color: #fff;
 }
