@@ -158,7 +158,7 @@
         });
         $('.nav-link').removeClass("active");
         $("#menu1").addClass("active");
-        $(document).on("change", ".selectedProperty", function ()  {
+        $("input[type='checkbox']").click(function ()  {
             if($('input:checkbox:checked').length > 10)
             {
                 alert("Email send limit is 10");
