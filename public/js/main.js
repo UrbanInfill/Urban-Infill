@@ -1063,7 +1063,7 @@ $("#sendEmail").click((e)=>{
 
 
 
-    $('input:checkbox').change(function() {
+    $('input:checkbox').click(function() {
         console.log( $('input:checkbox:checked').length);
     });
 
