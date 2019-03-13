@@ -190,7 +190,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<span class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" >' + property['address']['oneLine'] + '</span>' +
                                     '<div class="float-right">'+
                                     '<input type="checkbox" name="selectedItem" class="selectedProperty" aria-label="Checkbox for following text input">'+
-                                    '<a target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'"style="padding: 5px;"><i class="fas fa-home"></i></a>'+
+                                    '<a target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'"style="padding: 5px;"><i class="fas fa-home" style="color: black;"></i></a>'+
                                     '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '</div>'+
                                     '<div class="restaurant-content">' +
@@ -233,7 +233,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<span class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" >' + property['address']['oneLine'] + '</span>' +
                                     '<div class="float-right">'+
                                     '<input type="checkbox" name="selectedItem" class="selectedProperty" aria-label="Checkbox for following text input">'+
-                                    '<a target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'"style="padding: 5px;"><i class="fas fa-home"></i></a>'+
+                                    '<a target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'"style="padding: 5px;"><i class="fas fa-home" style="color: black;"></i></a>'+
                                     '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '</div>'+
                                     '<div class="restaurant-content">' +
