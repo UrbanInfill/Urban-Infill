@@ -158,8 +158,12 @@
         });
         $('.nav-link').removeClass("active");
         $("#menu1").addClass("active");
-        $(document).on("change", ".selectedProperty", function () {
-            console.log( $('input:checkbox:checked').length);
+        $(document).on("change", ".selectedProperty", function ()  {
+            if($('input:checkbox:checked').length > 10)
+            {
+                alert("Email send limit is 10");
+                $(this).attr('checked',false)
+            }
         });
     </script>
 

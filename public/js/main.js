@@ -3,7 +3,7 @@
 $("#houseDiv").hide();
 $("#eduDiv").hide();
 $("#incomeDiv").hide();
-//$("#poiContent").hide();
+$("#poiContent").hide();
 $('.toast').toast('show')
 // Ajax Requestsfas
 $.ajaxSetup({
@@ -1063,9 +1063,7 @@ $("#sendEmail").click((e)=>{
 
 
 
-    $(document).on("change", ".selectedProperty", function ()  {
-        console.log( $('input:checkbox:checked').length);
-    });
+
 
 
 
