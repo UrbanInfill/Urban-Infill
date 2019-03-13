@@ -185,7 +185,7 @@ function postData(url = ``, data = {},isVacant) {
                                 searchCount++;
                                 $('#searchCount').text("Property count : "+searchCount);
                                 $("#poiContent").show();
-                                var text = '<div class="swiper-slide">'  +
+                                var text = '<div class="swiper-slide" style="height: 100px;">'  +
                                     '<div class="box selectPOI">' +
                                     '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
                                     '<div class="float-right">'+
@@ -227,7 +227,7 @@ function postData(url = ``, data = {},isVacant) {
                                 searchCount++;
                                 $('#searchCount').text("Property count : "+searchCount);
                                 $("#poiContent").show();
-                                var text = '<div class="swiper-slide">'  +
+                                var text = '<div class="swiper-slide" style="height: 100px;">'  +
                                     '<div class="box selectPOI">' +
                                     '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
                                     '<div class="float-right">'+
