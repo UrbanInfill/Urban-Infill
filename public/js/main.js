@@ -233,6 +233,7 @@ function postData(url = ``, data = {},isVacant) {
                                     '<div class="float-right">'+
                                     '<input type="checkbox" name="selectedItem" class="selectedProperty" aria-label="Checkbox for following text input">'+
                                     '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
+                                    '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '</div>'+
                                     '<div class="restaurant-content">' +
                                     '<label>Legal Description</label>' +
