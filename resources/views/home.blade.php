@@ -86,6 +86,17 @@
                 </div>
                 <small id="emailHelp" class="form-text text-muted"></small>
 
+                <div class="row">
+                    <div class="col">
+                        <div class="next-slide "> <button type="button" class="btn btn-outline-dark" style="width: 100%;"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size: 20px;"></i></button></div>
+                    </div>
+                    <div class="col">
+                        <div class="prev-slide "> <button type="button" class="btn btn-outline-dark" style="width: 100%;"><i class="fa fa-arrow-circle-down" aria-hidden="true" style="font-size: 20px;"></i></button></div>
+                    </div>
+                </div>
+
+                <br>
+
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
 
@@ -98,8 +109,7 @@
                 </div>
                 <!--<div class="swiper-button-next"><img src="images/icons/right.png" alt="right"></div>
                 <div class="swiper-button-prev"><img src="images/icons/left.png" alt="left"></div>-->
-                <div class="next-slide"><i class="fa fa-arrow-circle-up" aria-hidden="true" style="font-size: 20px;"></i></div>
-                <div class="prev-slide"><i class="fa fa-arrow-circle-down" aria-hidden="true" style="font-size: 20px;"></i></div>
+
 
 
 
@@ -163,21 +173,6 @@
         #chart-1 a {
             display: none !important;
         }
-        .next-slide{
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            right: 0;
-            top: 55px;
-            cursor:pointer;
-        }
-        .prev-slide{
-            margin: 0;
-            padding: 0;
-            right: 0;
-            position: absolute;
-            top:80px;
-            cursor:pointer;
-        }
+
     </style>
 @endsection
