@@ -537,7 +537,7 @@ body .search-reduce > input.form-control{width:54%}
 .extra-area ,.extra-area > div{padding:0;}
 .extra-area > div label{text-align:left;font-weight:bold;margin-left:2px;}
 
-
+.swiper-slide{height: 100px;}
 /** Radio Button **/
 
 .selecting-area [type="checkbox"]:checked,
