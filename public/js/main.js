@@ -229,10 +229,10 @@ function postData(url = ``, data = {},isVacant) {
                                 $("#poiContent").show();
                                 var text = '<div class="swiper-slide" style="height: 100px;">'  +
                                     '<div class="box selectPOI">' +
-                                    '<a class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'">' + property['address']['oneLine'] + '</a>' +
+                                    '<p class="h3" target="_blank" line1="'+property["address"]["line1"]+'" line2="'+property["address"]["line2"]+'" >' + property['address']['oneLine'] + '</p>' +
                                     '<div class="float-right">'+
                                     '<input type="checkbox" name="selectedItem" class="selectedProperty" aria-label="Checkbox for following text input">'+
-                                    '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
+                                    '<a target="_blank" href="/getOwnerDetail/'+encodeURI(property["address"]["line1"])+'/' +encodeURI(property["address"]["line2"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '<a target="_blank" href="/getpoidata/'+encodeURI(property["address"]["oneLine"])+'/' +encodeURI(property["address"]["postal1"])+'"style="padding: 5px;"><i class="fas fa-external-link-alt"></i></a>'+
                                     '</div>'+
                                     '<div class="restaurant-content">' +
