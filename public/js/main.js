@@ -354,7 +354,7 @@ function getpageData(lat,lng,totalpage) {
 var homemarkers = [];
 function f(locations) {
     var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 5,
+        slidesPerView: 10,
         direction: 'vertical',
         slideToClickedSlide: false,
         on:{

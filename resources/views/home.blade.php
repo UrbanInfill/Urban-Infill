@@ -132,7 +132,7 @@
     <script type='text/javascript' src="js/donut-chart.js"></script>
     <script>
         var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 5,
+            slidesPerView: 10,
             direction: 'vertical',
             slideToClickedSlide: false,
             on:{
