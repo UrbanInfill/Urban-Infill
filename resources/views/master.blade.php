@@ -38,20 +38,7 @@
 </nav>
 
 
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>  Sir Fiverr just banned my account, I need a way to contact you. Please contact me on this email address: noufalsiddiqui@gmail.com</p>
-            </div>
-        </div>
-    </div>
-</div>
+
 @yield('content')
 
 
@@ -67,8 +54,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.6/js/swiper.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPAVKxutIiPNXJr8UeB2wwSrzrFA3-GuI&libraries=places&callback=initAutocomplete"></script>
 @yield('script')
-<script>
-    $('#exampleModal').modal('show')
-</script>
+
 </body>
 </html>
